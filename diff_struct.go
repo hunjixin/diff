@@ -6,14 +6,9 @@ package diff
 
 import (
 	"reflect"
-	"time"
 )
 
 func (d *Differ) diffStruct(path []string, a, b reflect.Value, parent interface{}) error {
-	if AreType(a, b, reflect.TypeOf(time.Time{})) {
-		return d.diffTime(path, a, b)
-	}
-
 	if a.Kind() == reflect.Invalid {
 		if d.DisableStructValues {
 			d.cl.Add(CREATE, path, nil, exportInterface(b))
